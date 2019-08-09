@@ -81,16 +81,21 @@ const people = {
     ]
 };
 
-// server.get('/people/:id', (request, response) => {
-//     const { id } = request.params
-//     //people.getById(id)
-//     response.status(200).response.json(id)
-// })
-
-server.post('/people/:id', (request, response) => {
-    people.insert(request.body)
-    response.status(200).response.json(people)
+server.get('/:id', (request, response) => {
+    const { id } = request.params
+    let name = ""
+    peope.map(people => {
+        if (people.id === id) {
+            name = people.name
+            response.status(200).response.json(name)
+        }
+    })
 })
+
+// server.post('/people/:id', (request, response) => {
+//     people.insert(request.body)
+//     response.status(200).response.json(people)
+// })
 
 // server.post('/people/id', (request, response => {
 //     people.insert(request.body)
