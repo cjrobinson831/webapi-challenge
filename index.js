@@ -1,6 +1,8 @@
 const express = require('express');
 const server = express();
 
+server.use(express.json());
+
 const people = {
     id: 1,
     name: 'Black Panther',
@@ -77,7 +79,27 @@ const people = {
         },
 
     ]
-}
+};
+
+// server.get('/people/:id', (request, response) => {
+//     const { id } = request.params
+//     //people.getById(id)
+//     response.status(200).response.json(id)
+// })
+
+server.post('/people/:id', (request, response) => {
+    people.insert(request.body)
+    response.status(200).response.json(people)
+})
+
+// server.post('/people/id', (request, response => {
+//     people.insert(request.body)
+//     response.status(200).response.json(id)
+// })
+
+// server.get('/chores', (request, response) => {
+//     response.status(200).response.json(chores)
+// })
 
 server.listen(8000, () => {
     console.log(`\n*** Server Running on http://localhost:8000 ***\n`)
